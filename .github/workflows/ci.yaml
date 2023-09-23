@@ -19,10 +19,10 @@ jobs:
     runs-on: ubuntu-latest
     env:
       GOPRIVATE: github.com/yuxsr
-      GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      GITHUB_ACCESS_TOKEN: ${{ secrets.GH_ACCESS_TOKEN }}
     steps:
       - uses: actions/checkout@v2
-      - run: git config --global url."https://${GITHUB_TOKEN}:x-oauth-basic@github.com/".insteadOf "https://github.com/"
+      - run: git config --global url."https://${GITHUB_ACCESS_TOKEN}:x-oauth-basic@github.com/".insteadOf "https://github.com/"
       - name: golangci-lint
         uses: golangci/golangci-lint-action@v2
         with:
