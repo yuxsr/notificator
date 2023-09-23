@@ -17,6 +17,9 @@ jobs:
   golangci:
     name: lint
     runs-on: ubuntu-latest
+    env:
+      GOPRIVATE: github.com/yuxsr
+      GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
     steps:
       - uses: actions/checkout@v2
       - name: golangci-lint
@@ -26,6 +29,9 @@ jobs:
   govulncheck_job:
     name: Run govulncheck
     runs-on: ubuntu-latest
+    env:
+      GOPRIVATE: github.com/yuxsr
+      GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
     steps:
       - id: govulncheck
         uses: golang/govulncheck-action@v1
