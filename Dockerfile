@@ -1,7 +1,9 @@
 FROM golang:1.21 AS builder
+ARG GITHUB_ACCESS_TOKEN
 ENV GOPRIVATE=github.com/yuxsr
 WORKDIR /go/src/app/
 COPY go.mod go.sum ./
+RUN git config --global url."https://${GITHUB_ACCESS_TOKEN}:x-oauth-basic@github.com/".insteadOf "https://github.com/"
 RUN go mod download
 COPY . .
 RUN make build
