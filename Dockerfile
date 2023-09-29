@@ -9,5 +9,6 @@ FROM alpine:latest
 RUN apk --no-cache add ca-certificates curl tzdata
 ENV TZ=Asia/Tokyo
 WORKDIR /usr/local/bin/
-COPY --from=builder /go/src/app/appctl .
+COPY --from=builder --chown=nobody:nogroup /go/src/app/appctl .
+USER nobody
 CMD ["/usr/local/bin/appctl", "serve"]
