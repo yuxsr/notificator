@@ -1,3 +1,6 @@
+/*
+Copyright © 2023 NAME HERE <EMAIL ADDRESS>
+*/
 package cmd
 
 import (
@@ -5,29 +8,24 @@ import (
 	"net"
 
 	"github.com/spf13/cobra"
-	"github.com/yuxsr/notificator/client"
-	"github.com/yuxsr/notificator/config"
-	"github.com/yuxsr/notificator/server"
-	"github.com/yuxsr/notificator/server/service"
+	"github.com/yuxsr/notificator/internal/client"
+	"github.com/yuxsr/notificator/internal/server"
+	"github.com/yuxsr/notificator/internal/server/service"
 )
 
-// NewServeCmd is create sub command `server` instance.
-func NewServeCmd() *cobra.Command {
-	return &cobra.Command{
-		Use:           "serve",
-		Short:         "Serve notificator",
-		Long:          ``,
-		SilenceUsage:  true,
-		SilenceErrors: true,
-		RunE: func(cmd *cobra.Command, args []string) error {
-			config := config.GetServerConfig()
-			return Serve(config)
-		},
-	}
+// serveCmd represents the serve command
+var serveCmd = &cobra.Command{
+	Use:   "serve",
+	Short: "serve notificator server",
+	Long:  `Serve notificator server.`,
+	RunE: func(cmd *cobra.Command, args []string) error {
+		config := getNotificatorConfig()
+		return Serve(config)
+	},
 }
 
 // Serve is run server
-func Serve(config config.ServerConfig) error {
+func Serve(config NotificatorConfig) error {
 	ctx := context.Background()
 	clinet, err := client.NewLineClient(ctx, client.LineClientConfig{
 		ChannelSecret:      config.LineChannelSecret,

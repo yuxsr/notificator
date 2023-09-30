@@ -1,13 +1,15 @@
+/*
+Copyright © 2023 NAME HERE <EMAIL ADDRESS>
+*/
 package main
 
 import (
 	"github.com/yuxsr/notificator/cmd"
-	"github.com/yuxsr/notificator/logging"
+	"github.com/yuxsr/notificator/internal/logging"
 )
 
 func main() {
-	logger := logging.NewLogger()
-	if err := cmd.NewRootCmd().Execute(); err != nil {
-		logger.Error("command execution error", "error", err)
+	if err := cmd.Execute(); err != nil {
+		logging.NewLogger().Error("cmd execution error", "error", err)
 	}
 }

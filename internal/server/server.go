@@ -1,7 +1,7 @@
 package server
 
 import (
-	"github.com/yuxsr/notificator/server/service"
+	"github.com/yuxsr/notificator/internal/server/service"
 	goproto "github.com/yuxsr/yuxsr-dev-pb/gencode/go_proto"
 	"google.golang.org/grpc"
 )
