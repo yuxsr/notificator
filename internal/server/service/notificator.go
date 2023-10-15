@@ -4,7 +4,7 @@ package service
 import (
 	"context"
 
-	goproto "github.com/yuxsr/yuxsr-dev-pb/gencode/go_proto"
+	protov1 "github.com/yuxsr/yuxsr-dev-pb/gencode/go/proto/v1"
 )
 
 type NotificatorServiceConfig struct {
@@ -15,15 +15,15 @@ type notificatorService struct {
 	client Client
 }
 
-func NewNotificatorService(config NotificatorServiceConfig) goproto.NotificatorServiceServer {
+func NewNotificatorService(config NotificatorServiceConfig) protov1.NotificatorServiceServer {
 	return &notificatorService{
 		client: config.Client,
 	}
 }
 
-func (n *notificatorService) Notify(ctx context.Context, req *goproto.NotifyRequest) (*goproto.NotifyResponse, error) {
+func (n *notificatorService) Notify(ctx context.Context, req *protov1.NotifyRequest) (*protov1.NotifyResponse, error) {
 	if err := n.client.Notify(ctx, req.Message); err != nil {
 		return nil, err
 	}
-	return &goproto.NotifyResponse{}, nil
+	return &protov1.NotifyResponse{}, nil
 }

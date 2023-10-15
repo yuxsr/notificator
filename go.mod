@@ -6,8 +6,8 @@ require (
 	github.com/line/line-bot-sdk-go/v7 v7.21.0
 	github.com/spf13/cobra v1.7.0
 	github.com/spf13/viper v1.16.0
-	github.com/yuxsr/yuxsr-dev-pb/gencode/go_proto v0.0.0-20230923082557-b1ff3b035ea2
-	google.golang.org/grpc v1.58.2
+	github.com/yuxsr/yuxsr-dev-pb/gencode/go/proto v0.0.4
+	google.golang.org/grpc v1.58.3
 )
 
 require (
