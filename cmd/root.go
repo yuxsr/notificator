@@ -62,12 +62,14 @@ const (
 	LineChannelSecret      = "LINE_CHANNEL_SECRET"
 	LineChannelAccessToken = "LINE_CHANNEL_ACCESS_TOKEN"
 	LineUserID             = "LINE_USER_ID"
+	MetricsAddr            = "METRICS_ADDR"
 )
 
 type NotificatorConfig struct {
 	LineChannelSecret      string
 	LineChannelAccessToken string
 	LineUserID             string
+	ObservabilityConfig
 }
 
 func getNotificatorConfig() NotificatorConfig {
@@ -75,6 +77,17 @@ func getNotificatorConfig() NotificatorConfig {
 		LineChannelSecret:      notificatorViper.GetString(LineChannelSecret),
 		LineChannelAccessToken: notificatorViper.GetString(LineChannelAccessToken),
 		LineUserID:             notificatorViper.GetString(LineUserID),
+		ObservabilityConfig:    getObservabilityConfig(),
 	}
 	return config
+}
+
+type ObservabilityConfig struct {
+	MetricsAddr string
+}
+
+func getObservabilityConfig() ObservabilityConfig {
+	return ObservabilityConfig{
+		MetricsAddr: notificatorViper.GetString(MetricsAddr),
+	}
 }
