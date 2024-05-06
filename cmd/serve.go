@@ -9,6 +9,7 @@ import (
 
 	"github.com/spf13/cobra"
 	"github.com/yuxsr/notificator/internal/client"
+	"github.com/yuxsr/notificator/internal/observability"
 	"github.com/yuxsr/notificator/internal/server"
 	"github.com/yuxsr/notificator/internal/server/service"
 )
@@ -39,6 +40,11 @@ func Serve(config NotificatorConfig) error {
 	server := server.RegisterNewGRPCServer(service.NotificatorServiceConfig{
 		Client: clinet,
 	})
+
+	shutdown := observability.InitMetrics(config.MetricsAddr)
+	defer func() {
+		_ = shutdown()
+	}()
 
 	lis, err := net.Listen("tcp", ":50051")
 	if err != nil {
