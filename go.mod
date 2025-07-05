@@ -1,12 +1,12 @@
 module github.com/yuxsr/notificator
 
-go 1.24
+go 1.24.4
 
 require (
 	github.com/line/line-bot-sdk-go/v7 v7.21.0
 	github.com/spf13/cobra v1.9.1
 	github.com/spf13/viper v1.20.1
-	github.com/yuxsr/yuxsr-dev-pb/gencode/go/proto v0.0.4
+	github.com/yuxsr/yuxsr-dev-pb/gencode/go/yuxsr_dev_pb v0.1.0
 	google.golang.org/grpc v1.73.0
 )
 
